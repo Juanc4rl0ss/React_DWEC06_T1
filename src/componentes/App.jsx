@@ -15,8 +15,10 @@ function App() {
   // Valida la categoría seleccionada,y la inicializamos en todas
   const [categoriaSeleccionada, setCategoria] = useState('todas');
 
+  const [datos, setDatos] = useState(Datos);
+
       //Empleamos 'reduce' para crear un Array con las categorias existentes en 'data.js' sin que se dupliquen,y así poder crear los botones posteriormente
-      const categoriasUnicas = Datos.reduce((categorias, dato) => {
+      const categoriasUnicas = datos.reduce((categorias, dato) => {
 
         //En caso de que no esté incluida la categoría, se añade al array
         if (!categorias.includes(dato.categoria)) {
@@ -61,7 +63,7 @@ function App() {
 
 
       //Ésta contante crea un map ya sea con todos los paisajes, o con los de la categoría seleccionada, empleando 'filter'
-      const deportesParaMostrar =  Datos.filter(deporte => categoriaSeleccionada === 'todas' || deporte.categoria === categoriaSeleccionada);
+      const deportesParaMostrar =  datos.filter(deporte => categoriaSeleccionada === 'todas' || deporte.categoria === categoriaSeleccionada);
 
   return (
   <section className="section"> 
