@@ -57,7 +57,7 @@ function App() {
 
   //Ésta funcion de limpieza, limpia el temporizador,para evitar solapaciones de estados anteriores
   return () => clearTimeout(temporizador);
-  }, [indiceActivo,categoriaSeleccionada, Datos]);
+  }, [indiceActivo,categoriaSeleccionada]);
 
 
       //Ésta contante crea un map ya sea con todos los paisajes, o con los de la categoría seleccionada, empleando 'filter'
