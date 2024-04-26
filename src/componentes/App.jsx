@@ -27,11 +27,13 @@ function App() {
         return categorias;
       }, []);
    
+    //Éstas funciones emplean 'useCallback' para que no se cree una nueva función cada vez que se renderiza el componente
     const handleCategoriaSeleccionada = useCallback((categoria) => {
       setCategoria(categoria);
       setIndiceActivo(0);
     }, []);
 
+    //
     const handleTodasLasCategorias = useCallback(() => {
       setCategoria('todas');
       setIndiceActivo(0);
@@ -93,41 +95,18 @@ function App() {
 
     <div className="section-center">
 
-    {deportesParaMostrar.map(({ id, src, img, categoria }, indice) => {
-          // Corregido: Uso correcto de paréntesis y 'return' en la función map
-         // Para cada imagen en mi conjunto de datos, decido qué clase CSS aplicar basándome en su índice.
-          // Por defecto, asigno a todas las imágenes la clase 'nextSlide'.
-          let nombreClase = 'nextSlide'; 
-
-          if (deportesParaMostrar.length === 2) {
-           // Cuando solo hay dos imágenes, alternamos entre 'activeSlide' y 'lastSlide'.
-          if (indice === indiceActivo) {
-            nombreClase = 'activeSlide'; // La imagen activa mantiene su clase.
-          } else {
-            nombreClase = 'lastSlide'; // La imagen no activa obtiene 'lastSlide' para deslizarse hacia la izquierda.
-          }
-        } else {
-
-
-          if (indice === indiceActivo) {
-
-            // La imagen actualmente activa recibe la clase 'activeSlide'.
-            nombreClase = 'activeSlide';
-            
-            //En caso de que el indice corresponda al anterior del índice activo,le asignamos el atributo de clase 'lastSlide'
-            //En caso de que el índice sea el primer objeto del Array, y evaluamos la última imagen del array 'naturaleza', le asignamos a ésta última imagen, el atributo de clase 'lastSlide'
-          } else if (indice === indiceActivo - 1 || (indiceActivo === 0 && indice === deportesParaMostrar.length - 1)) {
-            nombreClase = 'lastSlide';
-          } 
-        }
+    {deportesParaMostrar.map(({ id, src, img, categoria}, indice) => {
+         
           return (
             <Paisajes
               key={id}
               id={id}
-              nombreClase={nombreClase}
               src={src}
               img={img}
               categoria={categoria}
+              indice={indice}
+              indiceActivo={indiceActivo}
+              totalImagenes={deportesParaMostrar}
           />
           );
         })}
